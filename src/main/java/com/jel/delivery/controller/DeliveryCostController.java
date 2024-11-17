@@ -6,6 +6,7 @@ import com.jel.delivery.service.DeliveryCostService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -19,9 +20,8 @@ public class DeliveryCostController {
     }
 
     @PostMapping("/cost")
-    public ResponseEntity<DeliveryCostDto> calculateDeliveryCost(@RequestBody ParcelRequestDto requestDto) {
+    public ResponseEntity<DeliveryCostDto> calculateDeliveryCost(@Valid @RequestBody ParcelRequestDto requestDto) {
         return ResponseEntity.of(Optional.ofNullable(this.deliveryCostService.calculateDeliveryCost(requestDto)));
     }
-
 
 }

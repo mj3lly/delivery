@@ -15,7 +15,7 @@ public class VoucherService {
     }
 
     public VoucherDto retrieveVoucher(String voucherCode) {
-        return this.voucherClient.retrieveVoucher(voucherCode).getBody();
+        return this.voucherClient.retrieveVoucher(voucherCode);
     }
 
 }

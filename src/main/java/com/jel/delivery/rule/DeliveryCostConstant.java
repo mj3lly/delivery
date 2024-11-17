@@ -4,6 +4,7 @@ import com.jel.delivery.dto.VoucherDto;
 import lombok.experimental.UtilityClass;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.function.BiFunction;
 
 @UtilityClass
@@ -19,6 +20,11 @@ public final class DeliveryCostConstant {
             -> BigDecimal.valueOf(computeTotalDiscountedCost(0.05 * volume, voucher));
 
     private static float computeTotalDiscountedCost(Double initialCost, VoucherDto voucher) {
+        LocalDate localDate = LocalDate.now();
+        if (voucher.getExpiry().isBefore(localDate)) {
+            voucher.setDiscount(0);
+        }
+
         return (float) (initialCost - (initialCost * (voucher.getDiscount() / 100)));
     }
 
