@@ -3,7 +3,7 @@ WORKDIR /sources
 COPY /pom.xml /sources/
 RUN mvn -B -e -q -Dspring-boot.repackage.skip=true dependency:go-offline
 COPY /src/ /sources/src/
-RUN mvn clean verify -B -e -q \
+RUN mvn clean verify -B -e -q -DskipTests \
     && cp /sources/target/*.jar /sources/application.jar \
     && java -Djarmode=layertools -jar /sources/application.jar extract
 
