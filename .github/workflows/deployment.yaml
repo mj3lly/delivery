@@ -29,7 +29,8 @@ jobs:
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key.pem
           chmod 600 private_key.pem
-          ssh -o StrictHostKeyChecking=no -i private_key.pem root@165.232.171.38 "
+          ssh -o StrictHostKeyChecking=no -i private_key.pem root@165.232.171.38 <<EOF
             docker login -u ${{ github.repository_owner }} -p ${{ secrets.GHCR_TOKEN }} ghcr.io &&
             docker ps -aq | xargs -r docker stop | xargs -r docker rm &&
-            docker run -d -p 8080:8080 ghcr.io/${{ github.repository_owner }}/delivery:latest"
+            docker run -d -p 8080:8080 ghcr.io/${{ github.repository_owner }}/delivery:latest
+          EOF
