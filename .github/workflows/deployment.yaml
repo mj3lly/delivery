@@ -31,5 +31,5 @@ jobs:
           chmod 600 private_key.pem
           ssh -o StrictHostKeyChecking=no -i private_key.pem root@165.232.171.38 "
             docker login -u ${{ github.repository_owner }} -p ${{ secrets.GHCR_TOKEN }} ghcr.io &&
-            docker ps -aq | xargs docker stop | xargs docker rm &&
+            docker ps -aq | xargs -r docker stop | xargs -r docker rm &&
             docker run -d -p 8080:8080 ghcr.io/${{ github.repository_owner }}/delivery:latest"
