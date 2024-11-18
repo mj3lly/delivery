@@ -15,6 +15,7 @@ import java.math.RoundingMode;
 import java.util.function.Function;
 
 import static com.jel.delivery.rule.DeliveryCostCalculationRule.REJECT;
+import static com.jel.delivery.rule.DeliveryCostConstant.UNKNOWN_RULE;
 
 @Slf4j
 @Service
@@ -38,7 +39,7 @@ public class DeliveryCostService {
         VoucherDto voucher = this.voucherService.retrieveVoucher(requestDto.getVoucherCode());
         Pair<String, BigDecimal> pair = DeliveryCostCalculationRule.calculateDeliveryCost(param, voucher);
 
-        if (REJECT.name().equalsIgnoreCase(pair.getKey())) {
+        if (UNKNOWN_RULE.equalsIgnoreCase(pair.getKey())) {
             throw new ParcelException("There is no rule found for the specific request.");
         }
 

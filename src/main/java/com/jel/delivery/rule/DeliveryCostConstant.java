@@ -10,6 +10,7 @@ import java.util.function.BiFunction;
 @UtilityClass
 public final class DeliveryCostConstant {
 
+    public static final String UNKNOWN_RULE = "UNKNOWN_RULE";
     public static final BiFunction<Float, VoucherDto, BigDecimal> HEAVY_PARCEL = (weight, voucher)
             -> BigDecimal.valueOf(computeTotalDiscountedCost(20.0 * weight, voucher));
     public static final BiFunction<Float, VoucherDto, BigDecimal> SMALL_PARCEL = (volume, voucher)

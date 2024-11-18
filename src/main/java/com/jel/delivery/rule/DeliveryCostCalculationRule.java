@@ -36,7 +36,7 @@ public enum DeliveryCostCalculationRule {
                 .filter(rule -> rule.getCalculationRule().test(param))
                 .map(rule -> Pair.of(rule.name(), rule.getCalculateCost().apply(param, voucher)))
                 .findFirst()
-                .orElse(Pair.of(REJECT.name(), BigDecimal.ZERO));
+                .orElse(Pair.of(UNKNOWN_RULE, BigDecimal.ZERO));
     }
 
 }
