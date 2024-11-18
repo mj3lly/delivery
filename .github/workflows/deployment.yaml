@@ -23,3 +23,10 @@ jobs:
         run: |
           docker login -u ${{ github.repository_owner }} -p ${{ secrets.GHCR_TOKEN }} ghcr.io
           docker push ghcr.io/${{ github.repository_owner }}/delivery:latest
+      - name: Deploy
+        run: |
+          chmod 400 $SSH_KEY
+          ssh -o StrictHostKeyChecking=no -i $SSH_KEY root@165.232.171.38 "
+            docker login -u ${{ github.repository_owner }} -p ${{ secrets.GHCR_TOKEN }} ghcr.io &&
+            docker ps -aq | xargs docker stop | xargs docker rm &&
+            docker run -d -p 8080:8080 ghcr.io/${{ github.repository_owner }}/delivery:latest"
