@@ -46,6 +46,7 @@ public class DeliveryCostService {
         return DeliveryCostDto
                 .builder()
                     .costType(pair.getKey())
+                    .currency("PHP")
                     .deliveryCost(pair.getValue().setScale(2, RoundingMode.HALF_UP))
                 .build();
     }

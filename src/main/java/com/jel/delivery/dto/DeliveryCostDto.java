@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 public class DeliveryCostDto {
 
     private String costType;
+    private String currency;
     private BigDecimal deliveryCost;
 
 }

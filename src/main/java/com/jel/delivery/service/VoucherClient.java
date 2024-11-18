@@ -30,7 +30,7 @@ public class VoucherClient {
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(VoucherDto.class)
-                .onErrorReturn(VoucherDto.builder().discount(2).expiry(LocalDate.now()).build())
+                .onErrorReturn(VoucherDto.builder().discount(0).expiry(LocalDate.now()).build())
                 .block();
     }
 
