@@ -23,7 +23,8 @@ jobs:
         run: |
           docker login -u ${{ github.repository_owner }} -p ${{ secrets.GHCR_TOKEN }} ghcr.io
           docker push ghcr.io/${{ github.repository_owner }}/delivery:latest
-      - name: Deployenv:
+      - name: Deploy
+        env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
         run: |
           echo "$SSH_PRIVATE_KEY" > private_key.pem
